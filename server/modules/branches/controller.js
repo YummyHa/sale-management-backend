@@ -1,0 +1,1 @@
+import Branch from './model';
