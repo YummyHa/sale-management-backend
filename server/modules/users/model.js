@@ -45,6 +45,14 @@ var UserSchema = new Schema({
       message: '{VALUE} is not a valid phone number'
     }
   },
+  _branch: {
+    type: Schema.Types.ObjectId,
+    ref: 'Branch'
+  },
+  _products: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
   tokens: [{
     access: {
       type: String,

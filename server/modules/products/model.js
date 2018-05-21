@@ -4,8 +4,7 @@ const ProductSchema = new Schema({
   serial: {
     type: String,
     trim: true,
-    minlength: 1,
-    unique: true
+    minlength: 1
   },
   name: {
     type: String,
@@ -20,7 +19,7 @@ const ProductSchema = new Schema({
   },
   cate_id: {
     type: Schema.Types.ObjectId,
-    required: true,
+    ref: 'Category'
   },
   quantity: {
     type: Number,
@@ -40,10 +39,22 @@ const ProductSchema = new Schema({
       default: null
     }
   }],
-  attributes: {
-    type: Array,
-    default: []
-  }
+  attributes: [{
+    name: {
+      type: String
+    },
+    value: {
+      type: String
+    }
+  }],
+  _creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  connections: [{
+    kind: String,
+    type: { type: Schema.Types.ObjectId, refPath: 'connections.kind' }
+  }]
 });
 
 export default mongoose.model('Product', ProductSchema);
