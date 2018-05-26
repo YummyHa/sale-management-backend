@@ -5,8 +5,7 @@ const categorySchema = new Schema({
     type: String,
     required: true,
     minlength: 1,
-    trim: true,
-    unique: true
+    trim: true
   },
   description: {
     type: String,
@@ -16,6 +15,10 @@ const categorySchema = new Schema({
   attributes: {
     type: Array,
     required: true
+  },
+  _creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 })
 
