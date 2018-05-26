@@ -4,9 +4,17 @@ import { isAccessWithRole } from './middleware';
 import jwt from 'jsonwebtoken';
 
 const route  = new Router();
-
-route.post('/signup', AdminController.signup);
-route.post('/signin', AdminController.signin);
+//super
+route.post('/newSuper', AdminController.createSuper);
 route.get('/admins', isAccessWithRole('superadmin'), AdminController.getAllAdmin);
 
-export default route;
+// --User--
+route.get('/admin/:adminId/getlist', AdminController.getlist);
+route.post('/newAdmin/:adminId/newUser', AdminController.newAdmin);
+route.post('/signin', AdminController.signin);
+route.put('/admin/:adminId', AdminController.replaceUser);
+route.get('/admin/:adminId', AdminController.getUser);
+route.delete('/admin/:adminId', AdminController.deleteUser);
+
+// --Branch--
+export default route;   
