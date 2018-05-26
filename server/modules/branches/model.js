@@ -9,8 +9,10 @@ const BranchSchema =  new mongoose.Schema({
    
     manager: {
         type: Schema.Types.ObjectId,
-        ref: 'Admin'
-    }
+        ref: 'Admin',
+        unique: true
+    },
+
 })
 
 export default mongoose.model('Branch', BranchSchema);
