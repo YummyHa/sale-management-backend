@@ -7,10 +7,10 @@ import { User } from './model';
  * POST user
  */
 export const createUser = async (req, res) => {
-  var body = _.pick(req.body, ['email', 'password', 'shop_name', 'address', 'phone_number']);
-  var user = new User(body);
-  
   try {
+    var body = _.pick(req.body, ['email', 'password', 'shop_name', 'address', 'phone_number', '_branch']);
+    var user = new User(body);
+  
     await user.save();
     const token = await user.generateAuthToken();
     res.header('x-auth', token).send(user);
