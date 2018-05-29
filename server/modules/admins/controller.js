@@ -140,15 +140,15 @@ export const deleteUser = async (req, res) => {
     }
 }
 
-export const getUser = async (req, res) => {
+export const getUser = async (req, res, next) => {
     try {
         const { adminId } = req.params;
         const user = await Admin.findById(adminId);
-        console.log(user);
+        console.log(adminId);   
         res.status(200).json(user);
     }
     catch (err) {
-        res.status(400).json({ message: 'not found' });
+        res.status(400).json(err);
     }
 
 }
@@ -158,7 +158,7 @@ export const getlist = async (req, res) => {
     const { adminId } = req.params;
 
     Admin.find({ created_By: adminId }).exec(function (err, admins) {
-        if (err) return handleError(err);
+        if (err) return (err);
         console.log('The admins are an array: ', admins);
         res.status(200).json(admins);
     });

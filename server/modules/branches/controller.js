@@ -39,4 +39,14 @@ export const updateBranch = async (req, res) => {
     }
 }
 
-
+export const deleteBranch = async (req, res) => {
+    try {
+        const { branchId } = req.params;
+        console.log(branchId)
+        const result = await Branch.findByIdAndRemove(branchId);
+        res.status(200).json({ success: true });
+    }
+    catch (err) {
+        res.status(404).json({ message: 'Can not delete' });
+    }
+}

@@ -9,11 +9,11 @@ route.post('/newSuper', AdminController.createSuper);
 route.get('/admins', isAccessWithRole('superadmin'), AdminController.getAllAdmin);
 
 // --User--
-route.get('/admin/:adminId/getlist', AdminController.getlist);
+route.get('/listadmin/:adminId', AdminController.getlist);
 route.post('/newAdmin/:adminId/newUser', AdminController.newAdmin);
 route.post('/signin', AdminController.signin);
 route.put('/admin/:adminId', AdminController.replaceUser);
-route.get('/admin/:adminId', AdminController.getUser);
+route.get('/getadmin/:adminId', AdminController.getUser);
 route.delete('/admin/:adminId', AdminController.deleteUser);
 
 // --Branch--
