@@ -51,10 +51,6 @@ const ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  connections: [{
-    kind: String,
-    type: { type: Schema.Types.ObjectId, refPath: 'connections.kind' }
-  }]
 });
 
 export default mongoose.model('Product', ProductSchema);
