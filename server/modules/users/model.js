@@ -73,7 +73,7 @@ UserSchema.methods.toJSON = function() {
   let user = this;
   let userObject = user.toObject();
 
-  return _.pick(userObject, ['_id', 'email', 'shop_name', 'address', 'phone_number']);
+  return _.pick(userObject, ['_id', 'email', 'shop_name', 'address', 'phone_number', '_branch']);
 }
 
 /**
