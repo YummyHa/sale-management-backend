@@ -26,6 +26,11 @@ var UserSchema = new Schema({
     required: true,
     minlength: 1
   },
+  user_name: {
+    type: String,
+    required: true,
+    minlength: 1
+  },
   address: {
     type: String,
     trim: true,
@@ -73,7 +78,7 @@ UserSchema.methods.toJSON = function() {
   let user = this;
   let userObject = user.toObject();
 
-  return _.pick(userObject, ['_id', 'email', 'shop_name', 'address', 'phone_number', '_branch']);
+  return _.pick(userObject, ['_id', 'email', 'shop_name', 'address', 'phone_number', '_branch', 'user_name']);
 }
 
 /**

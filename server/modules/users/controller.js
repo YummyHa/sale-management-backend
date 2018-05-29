@@ -8,7 +8,7 @@ import { User } from './model';
  */
 export const createUser = async (req, res) => {
   try {
-    var body = _.pick(req.body, ['email', 'password', 'shop_name', 'address', 'phone_number', '_branch']);
+    var body = _.pick(req.body, ['email', 'password', 'shop_name', 'address', 'phone_number', '_branch', 'user_name']);
     var user = new User(body);
   
     await user.save();
