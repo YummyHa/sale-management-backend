@@ -18,7 +18,7 @@ middlewaresConfig(app);
 
 app.use('/api', [CategoryRoutes, ProductRoutes, UserRoutes , AdmnRoutes, BranchRoutes]);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, err => {
   if (err) {

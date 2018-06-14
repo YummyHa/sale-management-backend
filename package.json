@@ -4,7 +4,11 @@
   "description": "backend for the sale managment app",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "dev": "NODE_ENV=development || SET NODE_ENV=development && nodemon index.js"
+  },
+  "engines": {
+    "node": "9.8.0"
   },
   "author": "KhanhHa",
   "license": "ISC",
