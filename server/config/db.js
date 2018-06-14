@@ -1,7 +1,7 @@
 var env = process.env.NODE_ENV || 'development';
 console.log('env ****', env);
 
-var mongo_uri = 'mongodb+srv://hakhanh1106:Kh@nh135246789@sale-management-7i5if.mongodb.net/test?retryWrites=true';
+var mongo_uri = 'mongodb+srv://kkona1106:jUE7pUpZqBYC3jbC@sale-management-7i5if.mongodb.net/test?retryWrites=true';
 
 if (env === 'development') {
   process.env.PORT = 3000;
