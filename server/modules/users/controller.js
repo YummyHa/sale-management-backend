@@ -10,7 +10,7 @@ export const createUser = async (req, res) => {
   try {
     var body = _.pick(req.body, ['email', 'password', 'shop_name', 'address', 'phone_number', '_branch', 'user_name']);
     var user = new User(body);
-  
+    console.log(user);
     await user.save();
     const token = await user.generateAuthToken();
     res.header('x-auth', token).send(user);

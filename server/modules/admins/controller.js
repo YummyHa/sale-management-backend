@@ -1,5 +1,6 @@
 import Admin from './model';
 import Branch from '../branches/model';
+import User from '../users/model';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { JWT_SECRET } from './token';
@@ -72,7 +73,7 @@ export const signin = async (req, res, next) => {
                         roles: admin[0].roles,
                         category: admin[0].category,
                         created_By: admin[0].created_By
-                    }, JWT_SECRET, { expiresIn: "3h" });
+                    }, JWT_SECRET);
 
                     return res.status(200).json({ message: 'Login successful', token: token });
                 }
@@ -140,15 +141,15 @@ export const deleteUser = async (req, res) => {
     }
 }
 
-export const getUser = async (req, res) => {
+export const getUser = async (req, res, next) => {
     try {
         const { adminId } = req.params;
         const user = await Admin.findById(adminId);
-        console.log(user);
+        console.log(adminId);   
         res.status(200).json(user);
     }
     catch (err) {
-        res.status(400).json({ message: 'not found' });
+        res.status(400).json(err);
     }
 
 }
@@ -156,13 +157,14 @@ export const getUser = async (req, res) => {
 
 export const getlist = async (req, res) => {
     const { adminId } = req.params;
-
+    console.log(adminId);
     Admin.find({ created_By: adminId }).exec(function (err, admins) {
-        if (err) return handleError(err);
+        if (err) return (err);
         console.log('The admins are an array: ', admins);
         res.status(200).json(admins);
     });
 }
+
 
 
 export const createNewBranch = async (req, res) => {
