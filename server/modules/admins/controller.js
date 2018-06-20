@@ -29,13 +29,13 @@ export const createSuper = async (req, res, next) => {
 
 export const newAdmin = async (req, res, next) => {
     try {
-        if (req.body.role === 'superadmin') {
+        if (req.body.roles=== 'superadmin') {
             var roles = ["superadmin", "admin", "mod"]
         }
-        if (req.body.role === 'admin') {
+        if (req.body.roles === 'admin') {
             var roles = ["admin", "mod"]
         }
-        if (req.body.role === 'mod') {
+        if (req.body.roles === 'mod') {
             var roles = ["mod"]
         }
         const { adminId } = req.params;
