@@ -40,8 +40,18 @@ export const getBranch = async (req, res, next) => {
     }
 
 }
+//get branch of 1 admin
+export const getlistbranch = async (req, res) => {
+    const { adminId } = req.params;
+    console.log(adminId);
+    Branch.find({ manager: adminId }).exec(function (err, shops) {
+        if (err) return (err);
+        console.log('The shops are an array: ', shops);
+        res.status(200).json(shops);
+    });
+}
 
-
+//get all shop
 export const getShops = async (req, res) => {
     try {
 
@@ -78,6 +88,7 @@ export const deleteBranch = async (req, res) => {
 }
 
 
+//get shop by id
 export const getShop = async (req, res, next) => {
     try {
         const { shopId } = req.params;
@@ -90,6 +101,8 @@ export const getShop = async (req, res, next) => {
     }
 
 }
+
+//get shop of branch
 export const getShopBranch = async (req, res) => {
     const { branchId } = req.params;
     console.log(branchId);
@@ -101,6 +114,7 @@ export const getShopBranch = async (req, res) => {
     });
 }
 
+//delete shop
 export const deleteUser = async (req, res) => {
     try {
         const { shopId } = req.params;

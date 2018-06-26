@@ -29,9 +29,6 @@ export const createSuper = async (req, res, next) => {
 
 export const newAdmin = async (req, res, next) => {
     try {
-        if (req.body.roles=== 'superadmin') {
-            var roles = ["superadmin", "admin", "mod"]
-        }
         if (req.body.roles === 'admin') {
             var roles = ["admin", "mod"]
         }
@@ -95,7 +92,39 @@ export const getAllAdmin = async (req, res) => {
 
 }
 
+export const replaceAllUser = async (req, res, next) => {
+    try {
+        if (req.body.role === 'superadmin') {
+            var roles = ["superadmin", "admin", "mod"]
+        }
+        if (req.body.role === 'admin') {
+            var roles = ["admin", "mod"]
+        }
+        if (req.body.role === 'mod') {
+            var roles = ["mod"]
+        }
 
+        const { adminId } = req.params;
+        const newAdmin = req.body;
+        newAdmin.roles = roles;
+        const newUser = await Admin.findById(adminId, function (err, doc) {
+            if (err) {
+                res.status(500).json({ message: "Update user failed!" })
+            }
+            doc.username = req.body.username;
+            doc.password = req.body.password;
+            doc.roles = req.body.roles;
+            doc.email = req.body.email;
+            doc.save();
+        });
+        res.status(200).json({ newUser });
+
+
+    }
+    catch (err) {
+        res.status(404).json({ message: 'Update user failed!' })
+    }
+}
 export const replaceUser = async (req, res, next) => {
     try {
         if (req.body.role === 'superadmin') {
@@ -121,7 +150,7 @@ export const replaceUser = async (req, res, next) => {
             doc.email = req.body.email;
             doc.save();
         });
-        res.status(200).json({ success: true });
+        res.status(200).json({ newUser });
 
 
     }
@@ -183,4 +212,11 @@ export const createNewBranch = async (req, res) => {
         res.status(500).json({ message: "Create new branch faild!" });
     }
 
+}
+
+export const countUser = async (req, res, next) => {
+    Admin.count((err, count) => {
+        if(err) {return console.error(err); }
+        res.status(200).json(count);
+    })
 }
