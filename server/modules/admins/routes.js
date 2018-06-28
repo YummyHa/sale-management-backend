@@ -17,6 +17,7 @@ route.put('/admin/:adminId', AdminController.replaceUser);
 route.get('/getadmin/:adminId', AdminController.getUser);
 route.delete('/deleteadmin/:adminId', AdminController.deleteUser);
 route.get('/admins/count', AdminController.countUser);
+route.patch('/update/:adminId', AdminController.updateUser);
 
 // --Branch--
 export default route;   

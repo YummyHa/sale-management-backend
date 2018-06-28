@@ -91,33 +91,23 @@ export const getAllAdmin = async (req, res) => {
     }
 
 }
-
-export const replaceAllUser = async (req, res, next) => {
+export const updateUser = async (req, res) => {
     try {
-        if (req.body.role === 'superadmin') {
+        if (req.body.roles === 'superadmin') {
             var roles = ["superadmin", "admin", "mod"]
         }
-        if (req.body.role === 'admin') {
+        if (req.body.roles === 'admin') {
             var roles = ["admin", "mod"]
         }
-        if (req.body.role === 'mod') {
+        if (req.body.roles === 'mod') {
             var roles = ["mod"]
         }
 
         const { adminId } = req.params;
         const newAdmin = req.body;
-        newAdmin.roles = roles;
-        const newUser = await Admin.findById(adminId, function (err, doc) {
-            if (err) {
-                res.status(500).json({ message: "Update user failed!" })
-            }
-            doc.username = req.body.username;
-            doc.password = req.body.password;
-            doc.roles = req.body.roles;
-            doc.email = req.body.email;
-            doc.save();
-        });
-        res.status(200).json({ newUser });
+        // newAdmin.roles = roles;
+        const result = await Admin.findByIdAndUpdate(adminId, newAdmin);
+        res.status(200).json({ result });
 
 
     }
@@ -127,13 +117,13 @@ export const replaceAllUser = async (req, res, next) => {
 }
 export const replaceUser = async (req, res, next) => {
     try {
-        if (req.body.role === 'superadmin') {
+        if (req.body.roles === 'superadmin') {
             var roles = ["superadmin", "admin", "mod"]
         }
-        if (req.body.role === 'admin') {
+        if (req.body.roles === 'admin') {
             var roles = ["admin", "mod"]
         }
-        if (req.body.role === 'mod') {
+        if (req.body.roles === 'mod') {
             var roles = ["mod"]
         }
 
