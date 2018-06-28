@@ -38,3 +38,21 @@ export const getAllProducts = async (req, res) => {
     return res.status(e.status).json({ err: true, message: 'Error getting Products'});
   }
 }
+
+// get product by cateId
+export const getProductsByCateId = async (req, res) => {
+  try {
+    return res.status(200).json({ products: await Product.find({ cate_id: req.params.id }) });
+  } catch (e) {
+    return res.status(e.status).json({ err: true, message: 'Error getting Products'});
+  }
+}
+
+// get product by id
+export const getProductsById = async (req, res) => {
+  try {
+    return res.status(200).json({ product: await Product.findById(req.params.id) });
+  } catch (e) {
+    return res.status(e.status).json({ err: true, message: 'Error getting Product detail'});
+  }
+}
