@@ -39,6 +39,15 @@ export const getAllProducts = async (req, res) => {
   }
 }
 
+// get all products by UserId for admin
+export const getAllProductsByUserId = async (req, res) => {
+  try {
+    return res.status(200).json({ products: await Product.find({ _creator: req.params.id }) })
+  } catch (err) {
+    return res.status(e.status || 404).json({ err: true, message: err.message }) 
+  }
+}
+
 // get product by cateId
 export const getProductsByCateId = async (req, res) => {
   try {
