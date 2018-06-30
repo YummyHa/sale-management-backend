@@ -33,16 +33,26 @@ export const createProduct = async (req, res) => {
 // get all products 
 export const getAllProducts = async (req, res) => {
   try {
-    return res.status(200).json({ products: await Product.find({ _creator: req.user._id }) });
+    var products = await Product.find({ _creator: req.user._id });
+    if (!products) {
+      throw new Error('No products was found');
+    }
+    
+    return res.status(200).json(products);
   } catch (e) {
-    return res.status(e.status).json({ err: true, message: 'Error getting Products'});
+    return res.status(e.status || 404).json({ err: true, message: e.message});
   }
 }
 
 // get all products by UserId for admin
 export const getAllProductsByUserId = async (req, res) => {
   try {
-    return res.status(200).json({ products: await Product.find({ _creator: req.params.id }) })
+    var products = await Product.find({ _creator: req.params.id });
+    if (!products) {
+      throw new Error('No products was found');
+    }
+
+    return res.status(200).json(products);
   } catch (err) {
     return res.status(e.status || 404).json({ err: true, message: err.message }) 
   }
@@ -51,17 +61,27 @@ export const getAllProductsByUserId = async (req, res) => {
 // get product by cateId
 export const getProductsByCateId = async (req, res) => {
   try {
-    return res.status(200).json({ products: await Product.find({ cate_id: req.params.id }) });
+    var products = await Product.find({ cate_id: req.params.id });
+    if (!products) {
+      throw new Error('No products was found');
+    }
+    
+    return res.status(200).json(products);
   } catch (e) {
-    return res.status(e.status).json({ err: true, message: 'Error getting Products'});
+    return res.status(e.status || 404).json({ err: true, message: e.message});
   }
 }
 
 // get product by id
 export const getProductsById = async (req, res) => {
   try {
-    return res.status(200).json({ product: await Product.findById(req.params.id) });
+    var product = await Product.findById(req.params.id);
+    if (!product) {
+      throw new Error('No Product exist with that id');
+    }
+
+    return res.status(200).json(product);
   } catch (e) {
-    return res.status(e.status).json({ err: true, message: 'Error getting Product detail'});
+    return res.status(e.status || 404).json({ err: true, message: e.message});
   }
 }
