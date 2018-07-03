@@ -18,7 +18,7 @@ route.get('/products/:id', userAuthenticate, ProductController.getProductsById);
  * Routes for admin
  */
 // get all products by user id
-route.post('/admin/products/:id', isAccessWithRole('mod'), ProductController.getAllProductsByUserId);
+route.get('/admin/products/:id', isAccessWithRole('mod'), ProductController.getAllProductsByUserId);
 
 // get all products by category id
 route.get('/admin/products/category/:id', isAccessWithRole('mod'), ProductController.getProductsByCateId);
