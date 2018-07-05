@@ -12,6 +12,9 @@ const ProductSchema = new Schema({
     trim: true,
     minlength: 1
   },
+  image: {
+    type: Buffer
+  },
   description: {
     type: String,
     trim: true,

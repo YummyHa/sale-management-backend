@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import fs from 'fs';
 
 import Product from './model';
 
@@ -16,10 +17,13 @@ export const createProduct = async (req, res) => {
       // throw an err and return if it not valid
       return res.status(404).send();
     }
-  
+
     // replace the product's cate_id with the ObjectID
     newProduct.cate_id = cateId;
     
+    // upload image  
+    newProduct.image = fs.readFileSync(req.file.path);
+
     let product = await newProduct.save();
     let user = req.user;
     user._products.push(product);

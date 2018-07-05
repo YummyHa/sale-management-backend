@@ -1,6 +1,7 @@
 import express from 'express';
 import dbConfig from './config/db';
 import cors from 'cors';
+
 import middlewaresConfig from './config/middlewares';
 import { CategoryRoutes, ProductRoutes, UserRoutes , AdmnRoutes, BranchRoutes} from './modules';
 
