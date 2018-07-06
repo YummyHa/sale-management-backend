@@ -7,11 +7,11 @@ const BranchSchema =  new mongoose.Schema({
         unique: true
     },
    
-    manager: {
+    manager: [{
         type: Schema.Types.ObjectId,
         ref: 'Admin',
         unique: true
-    },
+    }],
 
 })
 
