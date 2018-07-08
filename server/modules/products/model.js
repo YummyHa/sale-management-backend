@@ -13,12 +13,11 @@ const ProductSchema = new Schema({
     minlength: 1
   },
   image: {
-    type: Buffer
+    type: String
   },
   description: {
     type: String,
     trim: true,
-    minlength: 1
   },
   cate_id: {
     type: Schema.Types.ObjectId,

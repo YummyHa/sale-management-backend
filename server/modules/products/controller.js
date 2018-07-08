@@ -1,13 +1,14 @@
 import mongoose from 'mongoose';
-import fs from 'fs';
 
 import Product from './model';
 
 // create a product
 export const createProduct = async (req, res) => {
   try {
-    const { serial, name, description, cate_id, quantity, origin_price, sell_price, attributes } = req.body;
-    const newProduct = new Product({ serial, name, description, cate_id, quantity, origin_price, sell_price, attributes });
+    console.log(req.body);
+    
+    const { serial, name, description, cate_id, quantity, origin_price, sell_price, attributes, image } = req.body;
+    const newProduct = new Product({ serial, name, description, cate_id, quantity, origin_price, sell_price, attributes, image });
   
     newProduct._creator = req.user._id;
   
@@ -17,12 +18,8 @@ export const createProduct = async (req, res) => {
       // throw an err and return if it not valid
       return res.status(404).send();
     }
-
     // replace the product's cate_id with the ObjectID
     newProduct.cate_id = cateId;
-    
-    // upload image  
-    newProduct.image = fs.readFileSync(req.file.path);
 
     let product = await newProduct.save();
     let user = req.user;
@@ -30,7 +27,8 @@ export const createProduct = async (req, res) => {
     await user.save();
     return res.status(201).json({ product });
   } catch (e) {
-    return res.status(404).json({ err: true, message: e.message });
+    console.log(e.message);
+    return res.status(e.status || 404).json({ err: true, message: e.message });
   }
 }
 
