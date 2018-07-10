@@ -3,7 +3,7 @@ import dbConfig from './config/db';
 import cors from 'cors';
 
 import middlewaresConfig from './config/middlewares';
-import { CategoryRoutes, ProductRoutes, UserRoutes , AdmnRoutes, BranchRoutes} from './modules';
+import { CategoryRoutes, ProductRoutes, UserRoutes , AdmnRoutes, BranchRoutes, CustomerRoutes, OrderRoutes} from './modules';
 
 const app = express();
 app.use(cors());
@@ -17,7 +17,7 @@ dbConfig();
  */
 middlewaresConfig(app);
 
-app.use('/api', [CategoryRoutes, ProductRoutes, UserRoutes , AdmnRoutes, BranchRoutes]);
+app.use('/api', [CategoryRoutes, ProductRoutes, UserRoutes , AdmnRoutes, BranchRoutes, CustomerRoutes, OrderRoutes]);
 
 const PORT = process.env.PORT;
 
