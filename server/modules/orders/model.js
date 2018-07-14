@@ -3,7 +3,8 @@ import mongoose, { Schema } from 'mongoose';
 const orderSchema = new Schema({
   _customer: {
     type: Schema.Types.ObjectId,
-    ref: 'Customer'
+    ref: 'Customer',
+    default: null
   },
   time: {
     type: Date,
@@ -15,8 +16,17 @@ const orderSchema = new Schema({
       ref: 'Product'
     },
     qty: {
-      type: Number
+      type: Number,
+      required: true
     },
+    price: {
+      type: Number,
+      required: true
+    },
+    price_origin: {
+      type: Number,
+      required: true
+    }
   }],
   saleOff: {
     type: Number,

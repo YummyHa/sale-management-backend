@@ -9,5 +9,7 @@ const route = new Router();
  */
 route.post('/customer', userAuthenticate, CustomerController.createCustomer);
 route.get('/customers', userAuthenticate, CustomerController.getCustomers);
+route.delete('/customer', userAuthenticate, CustomerController.deleteCustomer);
+route.patch('/customer', userAuthenticate, CustomerController.updateCustomer);
 
 export default route;

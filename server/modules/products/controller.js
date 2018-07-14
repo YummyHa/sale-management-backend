@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import _ from 'lodash';
 
 import Product from './model';
 
@@ -85,5 +86,31 @@ export const getProductsById = async (req, res) => {
     return res.status(200).json(product);
   } catch (e) {
     return res.status(e.status || 404).json({ err: true, message: e.message});
+  }
+}
+
+// update Product
+export const updateProduct = async (req, res) => {
+  try {
+    var id = req.body.id;
+    var body = _.pick(req.body, ['serial', 'name', 'description', 'cate_id', 'quantity', 'origin_price', 'sell_price', 'attributes', 'image']);
+
+    var product = await Product.findByIdAndUpdate(id, {$set: body}, {new: true});
+    if (!product) res.status(404).send();
+      else res.send({ product });
+  } catch (err) {
+    res.status(err.status || 400).json({ err: true, message: err.message });
+  }
+}
+
+// delete Product
+export const deleteProdcut = async(req, res) => {
+  try {
+    var id = req.body.id;
+    var product = await Product.findByIdAndRemove(id);
+    if (!product) res.status(404).send();
+      else res.send({ product });
+  } catch (err) {
+    res.status(err.status || 400).json({ err: true, message: err.message });
   }
 }

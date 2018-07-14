@@ -25,22 +25,16 @@ const ProductSchema = new Schema({
   },
   quantity: {
     type: Number,
-    default: null
+    default: 0
   },
   origin_price: {
     type: Number,
-    default: null
+    default: 0
   },
-  sell_price: [{
-    value: {
-      type: Number,
-      default: null
-    },
-    updatedAt: {
-      type: Number,
-      default: null
-    }
-  }],
+  sell_price: {
+    type: Number,
+    default: 0
+  },
   attributes: [{
     name: {
       type: String
