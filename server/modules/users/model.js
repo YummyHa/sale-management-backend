@@ -42,6 +42,10 @@ var UserSchema = new Schema({
     required: true,
     default: 0
   },
+  _admin: {
+    type: Schema.Types.ObjectId,
+    ref: 'Admin'
+  },
   phone_number: {
     type: String,
     trim: true,
@@ -83,7 +87,7 @@ UserSchema.methods.toJSON = function() {
   let user = this;
   let userObject = user.toObject();
 
-  return _.pick(userObject, ['_id', 'email', 'shop_name', 'address', 'phone_number', '_branch', 'user_name', 'status']);
+  return _.pick(userObject, ['_id', 'email', 'shop_name', 'address', 'phone_number', '_branch', 'user_name', 'status', '_admin']);
 }
 
 /**
