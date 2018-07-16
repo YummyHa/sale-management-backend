@@ -63,10 +63,6 @@ var UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Branch'
   },
-  _products: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Product'
-  }],
   tokens: [{
     access: {
       type: String,
