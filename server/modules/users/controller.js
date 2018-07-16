@@ -46,7 +46,7 @@ export const authenticateUser = async (req, res) => {
 // update User
 export const updateUser = async (req, res) => {
   try {
-    var body = _.pick(req.body, ['email', 'shop_name', 'address', 'phone_number', '_branch', 'user_name', '_admin']);
+    var body = _.pick(req.body, ['email', 'shop_name', 'address', 'phone_number', '_branch', 'user_name']);
 
     var user = await User.findByIdAndUpdate(req.user._id, {$set: body}, {new: true});
     if (!user) res.status(404).send();
@@ -60,7 +60,7 @@ export const updateUser = async (req, res) => {
 export const updateUserByAdmin = async (req, res) => {
   try {
     var id = req.params.id;
-    var body = _.pick(req.body, ['email', 'shop_name', 'address', 'phone_number', '_branch', 'user_name', '_admin']);
+    var body = _.pick(req.body, ['email', 'shop_name', 'address', 'phone_number', '_branch', 'user_name', '_admin', 'status']);
 
     var user = await User.findByIdAndUpdate(id, {$set: body}, {new: true});
     if (!user) res.status(404).send();
