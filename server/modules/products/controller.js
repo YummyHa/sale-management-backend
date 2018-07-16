@@ -23,9 +23,6 @@ export const createProduct = async (req, res) => {
     newProduct.cate_id = cateId;
 
     let product = await newProduct.save();
-    let user = req.user;
-    user._products.push(product);
-    await user.save();
     return res.status(201).json({ product });
   } catch (e) {
     console.log(e.message);
