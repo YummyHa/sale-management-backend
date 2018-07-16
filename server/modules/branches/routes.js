@@ -6,7 +6,7 @@ const route  = new Router();
 route.get('/getbranchs', BranchController.getBranchs);
 route.get('/getBranch/:branchId', BranchController.getBranch);
 route.post('/newbranch', BranchController.createNewBranch);
-route.put('/updatebranch/:branchId', BranchController.updateBranch);
+route.patch('/updatebranch/:branchId', BranchController.updateBranch);
 route.delete('/deleteBranch/:branchId', BranchController.deleteBranch);
 
 //shop api

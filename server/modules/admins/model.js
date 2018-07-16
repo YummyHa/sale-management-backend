@@ -20,7 +20,11 @@ const AdminSchema = new mongoose.Schema({
       message: '{VALUE} is not a valid email'
     }
   },
-
+  status: {
+    type: Number,
+    required: true,
+    default: 0
+  },
   password: {
     type: String,
     required: true,

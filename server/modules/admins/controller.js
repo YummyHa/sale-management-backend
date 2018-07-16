@@ -1,6 +1,6 @@
 import Admin from './model';
 import Branch from '../branches/model';
-import User from '../users/model';
+import { User } from '../users/model';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { JWT_SECRET } from './token';
@@ -69,7 +69,7 @@ export const signin = async (req, res, next) => {
                         email: admin[0].email,
                         roles: admin[0].roles,
                         category: admin[0].category,
-                        created_By: admin[0].created_By
+                        created_By: admin[0].created_By,
                     }, JWT_SECRET);
 
                     return res.status(200).json({ message: 'Login successful', token: token });
@@ -79,6 +79,7 @@ export const signin = async (req, res, next) => {
         })
         .catch()
 }
+
 
 
 export const getAllAdmin = async (req, res) => {
@@ -184,7 +185,18 @@ export const getlist = async (req, res) => {
     });
 }
 
+export const getShop = async (req, res) => {
+   
+        const { adminId } = req.params;
+        console.log(adminId);
+        User.find({ _admin: adminId}).exec(function (err, shops) {
+            if(err) return (err);
+            console.log('the shops are an array: ', shops);
+            res.status(200).json(shops);
+        })
+ 
 
+}
 
 export const createNewBranch = async (req, res) => {
     try {

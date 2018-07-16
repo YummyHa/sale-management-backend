@@ -20,4 +20,7 @@ route.get('/admins/count', AdminController.countUser);
 route.patch('/update/:adminId', AdminController.updateUser);
 
 // --Branch--
+
+//
+route.get('/getCustomer/:adminId',isAccessWithRole('mod'), AdminController.getShop);
 export default route;   
