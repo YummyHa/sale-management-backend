@@ -70,6 +70,7 @@ export const signin = async (req, res, next) => {
                         roles: admin[0].roles,
                         category: admin[0].category,
                         created_By: admin[0].created_By,
+                        status: admin[0].status
                     }, JWT_SECRET);
 
                     return res.status(200).json({ message: 'Login successful', token: token });
