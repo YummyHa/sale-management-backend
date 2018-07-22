@@ -11,6 +11,7 @@ export const createReceipt = async (req, res) => {
     if (!receipt) res.status(400).send();
     return res.status(201).send({ receipt });
   } catch (e) {
+    console.log(e.message);
     return res.status(e.status || 404).json({ err: true, message: e.message });
   }
 }
