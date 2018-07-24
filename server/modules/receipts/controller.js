@@ -29,3 +29,17 @@ export const getReceipts = async (req, res) => {
     return res.status(e.status || 404).json({ err: true, message: e.message });
   }
 }
+
+// get all Receipts by admin
+export const getReceiptsByAdmin = async (req, res) => {
+  try {
+    var receipts = await Receipt.find({ _creator: req.params.id }).populate('_producer', 'name').populate('products._product', ['serial', 'name']);
+    if (!receipts) {
+      throw new Error('No receipts was found with this user')
+    }
+
+    return res.status(200).json(receipts);
+  } catch (e) {
+    return res.status(e.status || 404).json({ err: true, message: e.message });
+  }
+}

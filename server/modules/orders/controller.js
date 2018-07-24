@@ -27,3 +27,17 @@ export const getOrders = async (req, res) => {
     return res.status(e.status || 404).json({ err: true, message: e.message });
   }
 }
+
+// get all orders by admin
+export const getOrdersByAdmin = async (req, res) => {
+  try {
+    var orders = await Order.find({ _creator: req.params.id }).populate('_customer', 'name').populate('products._product', ['serial', 'name']);
+    if (!orders) {
+      throw new Error('No orders was found with this user')
+    }
+
+    return res.status(200).json(orders);
+  } catch (e) {
+    return res.status(e.status || 404).json({ err: true, message: e.message });
+  }
+}

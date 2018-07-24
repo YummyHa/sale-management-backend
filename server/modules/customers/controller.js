@@ -54,3 +54,17 @@ export const updateCustomer = async (req, res) => {
     res.status(e.status || 400).json({ err: true, message: e.message });
   }
 }
+
+// get all customers by admin
+export const getCustomersByAdmin = async (req, res) => {
+  try {
+    var customers = await Customer.find({ _creator: req.params.id })
+    if (!customers) {
+      throw new Error('No customers was found with this user')
+    }
+
+    return res.status(200).json(customers);
+  } catch (e) {
+    return res.status(e.status || 404).json({ err: true, message: e.message });
+  }
+}

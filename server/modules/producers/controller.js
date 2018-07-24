@@ -55,3 +55,17 @@ export const updateProducer = async (req, res) => {
     res.status(e.status || 400).json({ err: true, message: e.message });
   }
 }
+
+// get all producers by admin
+export const getProducersByAdmin = async (req, res) => {
+  try {
+    var producers = await Producer.find({ _creator: req.params.id })
+    if (!producers) {
+      throw new Error('No producers was found with this user')
+    }
+
+    return res.status(200).json(producers);
+  } catch (e) {
+    return res.status(e.status || 404).json({ err: true, message: e.message });
+  }
+}
