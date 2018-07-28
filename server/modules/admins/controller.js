@@ -108,8 +108,19 @@ export const updateUser = async (req, res) => {
         const { adminId } = req.params;
         const newAdmin = req.body;
         // newAdmin.roles = roles;
-        const result = await Admin.findByIdAndUpdate(adminId, newAdmin);
-        res.status(200).json({ result });
+        const newUser = await Admin.findById(adminId, function (err, doc) {
+            if (err) {
+                res.status(500).json({ message: "Update user failed!" })
+            }
+            doc.username = req.body.username;
+            doc.password = req.body.password;
+            doc.roles = req.body.roles;
+            doc.email = req.body.email;
+            doc.status = req.body.status;
+            doc.save();
+            console.log(doc.password);
+        });
+        res.status(200).json({ newUser });
 
 
     }

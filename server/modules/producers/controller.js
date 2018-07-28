@@ -61,7 +61,7 @@ export const getProducersByAdmin = async (req, res) => {
   try {
     var producers = await Producer.find({ _creator: req.params.id })
     if (!producers) {
-      throw new Error('No producers was found with this user')
+      throw new Error('No producers was found with this user')  
     }
 
     return res.status(200).json(producers);
