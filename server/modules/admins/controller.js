@@ -110,9 +110,9 @@ export const updateUser = async (req, res) => {
         // newAdmin.roles = roles;
         const newUser = await Admin.findById(adminId, async function (err, doc) {
             try {
-                if (err) {
-                    res.status(500).json({ message: "Update user failed!" })
-                }
+                // if (err) {
+                //     res.status(500).json({ message: "Update user failed!" })
+                // }
                 doc.username = req.body.username;
                 doc.password = req.body.password;
                 doc.roles = req.body.roles;
@@ -120,11 +120,12 @@ export const updateUser = async (req, res) => {
                 doc.status = req.body.status;
                 await doc.save();
                 console.log(doc.password);
+                res.status(200).json({ doc });
             } catch (err) {
                 res.status(404).json({ message: 'Update user failed!' });
             }
         });
-        res.status(200).json({ newUser });
+       
 
 
     }
