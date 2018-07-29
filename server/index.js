@@ -50,12 +50,19 @@ io.on('connection', (socket) => {
 
     console.log('room: ', params.room);
     socket.join(params.room);
-    socket.join(params.fromId);
     users.removeUser(socket.id);
     users.addUser(socket.id, params.fromId, params.toId, params.room);
 
     callback();
   });
+
+  socket.on('adminJoin', (params, callback) => {
+    if (!isRealString(params.id)) {
+      return callback('có lỗi xảy ra');
+    }
+    socket.join(params.id);
+    callback();
+  })
 
   socket.on('createMessage', (message, callback) => {
     var user = users.getUser(socket.id)
