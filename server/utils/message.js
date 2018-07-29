@@ -1,5 +1,6 @@
-var generateMessage = (from, to, text, room) => {
+var generateMessage = (_id, from, to, text, room) => {
   return {
+    _id,
     from,
     to,
     text,

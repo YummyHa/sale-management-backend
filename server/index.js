@@ -64,7 +64,7 @@ io.on('connection', (socket) => {
     callback();
   })
 
-  socket.on('createMessage', (message, callback) => {
+  socket.on('createMessage', async (message, callback) => {
     var user = users.getUser(socket.id)
 
     if (user && isRealString(message.text)) {
@@ -77,9 +77,9 @@ io.on('connection', (socket) => {
         createdAt: new Date().getTime()
       });
 
-      var msg = message.save();
+      var msg = await message.save();
 
-      io.to(user.room).emit('newMessage', generateMessage(user.fromId, user.toId, message.text, user.room));
+      io.to(user.room).emit('newMessage', generateMessage(msg._id, user.fromId, user.toId, message.text, user.room));
       io.to(user.toId).emit('newInComeMessage', { from: user.fromId });
     }
 
