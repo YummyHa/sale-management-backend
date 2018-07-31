@@ -42,7 +42,7 @@ export const deleteProducer = async (req, res) => {
   }
 }
 
-// update customer
+// update producer
 export const updateProducer = async (req, res) => {
   try {
     const id = req.body.id;

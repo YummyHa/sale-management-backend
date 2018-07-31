@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import Category from './model';
 
 // create a new category
@@ -39,5 +41,31 @@ export const getCategoriesByUserId = async (req, res) => {
     return res.status(200).json(categories);
   } catch (e) {
     return res.status(e.status || 404).json({ err: true, message: e.message });
+  }
+}
+
+// delete a category
+export const deleteCategory = async (req, res) => {
+  try {
+    const id = req.body.id;
+    var category = await Category.findByIdAndRemove(id);
+    if (!category) res.status(404).send();
+      else res.send({ category });
+  } catch (e) {
+    res.status(e.status || 404).json({ err: true, message: e.message });
+  }
+}
+
+// update category
+export const updateCategory = async (req, res) => {
+  try {
+    const id = req.body.id;
+    var body = _.pick(req.body, ['name', 'description', 'attributes']);
+
+    var category = await Category.findByIdAndUpdate(id, {$set: body}, {new: true});
+    if (!category) res.status(404).send();
+      else res.send({ category });
+  } catch (err) {
+    res.status(e.status || 400).json({ err: true, message: e.message });
   }
 }

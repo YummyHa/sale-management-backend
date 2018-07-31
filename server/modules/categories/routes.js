@@ -10,6 +10,8 @@ const route = new Router();
  */
 route.post('/categories', userAuthenticate, CategoryController.createCategory);
 route.get('/categories', userAuthenticate, CategoryController.getCategories);
+route.patch('/category', userAuthenticate, CategoryController.updateCategory);
+route.delete('/category', userAuthenticate, CategoryController.deleteCategory);
 
 /**
  * Admin routes
