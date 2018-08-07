@@ -26,7 +26,6 @@ export const createSuper = async (req, res, next) => {
 
 
 
-
 export const newAdmin = async (req, res, next) => {
     try {
         if (req.body.roles === 'admin') {
